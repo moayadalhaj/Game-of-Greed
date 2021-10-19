@@ -1,6 +1,6 @@
 # Game Of Greed
 
-PR:https://github.com/moayadalhaj/Game-of-Greed/pull/2
+PR:https://github.com/moayadalhaj/Game-of-Greed/pull/4
 
 This is the first version of game of greed
 
