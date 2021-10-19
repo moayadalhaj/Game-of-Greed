@@ -17,7 +17,7 @@ class Banker:
         amount=self.shelved
         self.balance+=self.shelved
         self.shelved=0
-        return amount
+        return self.balance
 
     def clear_shelf(self):
         self.shelved=0
