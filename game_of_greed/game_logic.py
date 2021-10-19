@@ -78,6 +78,30 @@ class GameLogic():
         output=[random.randint(1,6) for i in range(int_input)]
         return tuple(output)
 
+    @staticmethod
+    def get_scorers(dice):
+        dices_score=GameLogic.calculate_score(dice)
+        if dices_score ==0:
+            return tuple()
+        dices=[]
+        for i in dice:
+            if not GameLogic.calculate_score((i,))==0:
+                dices.append(i)
+        
+        return tuple(dices)
+    
+    @staticmethod
+    def validate_keepers(roll, keepers):
+        if len(keepers) > len(roll):
+            return False
+        
+        roll=list(roll)
+        for i in keepers:
+            if i in roll:
+                roll.remove(i)
+            else:
+                return False
+        return True
 
 if __name__== '__main__':
     c=GameLogic()
