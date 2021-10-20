@@ -104,8 +104,8 @@ class Banker:
         self.shelved=0
 
 class Game(Banker):
-    def __init__ (self,roller=None ,round=1, dice=6, flag=True, score=0,flag2=True,dice2=0):
-        self.roller=roller
+    def __init__ (self,roll=None,round=1, dice=6, flag=True, score=0,flag2=True,dice2=0):
+        self.roll=roll
         self.round=round
         self.dice=dice
         self.score=score
@@ -114,18 +114,21 @@ class Game(Banker):
         self.flag2=flag2
         self.dice2=dice2
 
-    def play(self,roller):
+    def play(self,roller=None):
         print("Welcome to Game of Greed")
         print("(y)es to play or (n)o to decline")
-        self.roller=roller
+        self._roller=roller or GameLogic.roll_dice
+        self.roll=self._roller
         user_response = input("> ")
         if user_response=="n":
             print("OK. Maybe another time")
-        else:
+        elif user_response=="y":
             while self.flag and not self.dice == 0:
-                dices=roller(self.dice)
+                dices=self._roller(self.dice)
                 self.rolling(dices)
-           
+                if self.round>20:
+                    print(f'Thanks for playing. You earned {self.balance} points')
+                    break
     def rolling(self,dices):
 
         if self.dice == 6:
@@ -137,11 +140,12 @@ class Game(Banker):
         print(f"Rolling {self.dice} dice...")
         print(f"*** {' '.join([str(i) for i in dices])} ***")  
         if not self.zilch(dices):
-            print('You banked 0 points in round 1')
+            print(f'You banked 0 points in round {self.round}')
             print(f'Total score is {self.balance} points')
             self.round+=1
             self.dice=6
-            self.rolling(self.roller(self.dice))
+            self.shelved=0
+            self.rolling(self.roll(self.dice))
 
         if self.flag==True:
             print("Enter dice to keep, or (q)uit:")
@@ -185,7 +189,7 @@ class Game(Banker):
 
             if user_input == 'r':
                 unbanked_score=GameLogic.calculate_score(user_tuple)
-                self.rolling(self.roller(self.dice))
+                self.rolling(self.roll(self.dice))
 
             elif user_input == 'b':
                 print(f"You banked {self.shelved} points in round {self.round}")
@@ -193,6 +197,7 @@ class Game(Banker):
                 self.round+=1
                 self.dice=6
                 self.bank()
+                self.score+=self.balance
 
             elif user_input == 'q':
                 self.flag=False
@@ -228,7 +233,7 @@ class Game(Banker):
             if user_list == [1,2,3,4,5,6]:
                 self.flag2=False
                 self.dice2=6
-            if len(user_list)==6 and Counter(user_list).most_common()[1][1] == 2:
+            if Counter(user_list).most_common()[0][1] == 2 and Counter(user_list).most_common()[1][1] == 2 and Counter(user_list).most_common()[2][1] == 2:
                 self.flag2=False
                 self.dice2=6
                 
