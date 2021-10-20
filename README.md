@@ -1,8 +1,8 @@
 # Game Of Greed
 
-PR:https://github.com/moayadalhaj/Game-of-Greed/pull/5
+PR:https://github.com/moayadalhaj/Game-of-Greed/pull/6
 
-This is the third version of game of greed
+This is the fourth version of game of greed
 
 ## functionality
 
@@ -10,7 +10,7 @@ up to now, we have three classes, GameLogic, Banker and Game.
 
 GameLogic has two static methods, calculate_score: to calculate the score for the round, and roll_dice to return random numbers between 1 and 6, the amount of values in the tuple depends on the input number to the method
 
-Banker has four methods:
+**Banker has four methods:**
 
 1. init: for initializing an instance
 
@@ -20,7 +20,7 @@ Banker has four methods:
 
 4. clear_shelf: to clear the temporary shelf
 
-Game has five methods:
+**Game has five methods:**
 
 1. init: for initializing an instance
 
@@ -31,3 +31,7 @@ Game has five methods:
 4. cheat: to handle cheating scenarios
 
 5. zilch: for no points in the round, and round is over
+
+**Bot Class :**
+
+1. Add multiple bots to play the game.
