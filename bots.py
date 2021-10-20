@@ -143,8 +143,12 @@ class Khaled(BaseBot):
 
 class Moayed(BaseBot):
     def _roll_bank_or_quit(self):
-        if self.dice_remaining<3:
+        if self.dice_remaining > 3:
+            return "r"
+        if self.unbanked_points >= 600:
             return "b"
+        if self.dice_remaining<3:
+            return"b"
 
 class Tasneem(BaseBot):
     def _roll_bank_or_quit(self):
